@@ -33,7 +33,7 @@ const profesorSchema = new Schema({
             message: 'El profesor debe ser mayor de 18 años',
         },
     },
-    telefono: { // Nuevo campo agregado
+    telefono: { // Nuevo campo agregado de issue #70
         type: String,
         required: [true, 'El teléfono es obligatorio'],
         match: [/^\d{10}$/, 'El teléfono debe ser numérico y tener 10 dígitos'],

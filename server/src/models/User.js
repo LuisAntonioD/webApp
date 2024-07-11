@@ -14,6 +14,9 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    imgurl:{
+        type: String,
+    },
     roles: [{
         ref: "Role",
         type: Schema.Types.ObjectId

@@ -11,11 +11,12 @@ import * as token from "../controllers/token.controller.js"
 export const signUp = async (req,res) => {
     try{
          //extraer datos de peticion
-    const {username,email,password} = req.body;
+    const {username,email,imgurl,password} = req.body;
     //crear nuevo usuario
     const newUser = new User({
         username,
         email,
+        imgurl,
         password: await User.encryptPassword(password)
     });
 

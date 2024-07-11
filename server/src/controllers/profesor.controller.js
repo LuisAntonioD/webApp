@@ -33,8 +33,8 @@ export const getProfesorById = async (req, res) => {
 // Crear un nuevo profesor
 export const createProfesor = async (req, res) => {
     try {
-        const { nombre, apellidos, numeroEmpleado, correo, fechaNacimiento } = req.body;
-        const newProfesor = new Profesor({ nombre, apellidos, numeroEmpleado, correo, fechaNacimiento });
+        const { nombre, apellidos, numeroEmpleado, correo, fechaNacimiento, telefono } = req.body;
+        const newProfesor = new Profesor({ nombre, apellidos, numeroEmpleado, correo, fechaNacimiento, telefono });
         const profesorSave = await newProfesor.save();
         res.status(201).json(profesorSave);
     } catch (error) {
@@ -46,8 +46,8 @@ export const createProfesor = async (req, res) => {
 // Actualizar un profesor por su ID
 export const updateProfesor = async (req, res) => {
     try {
-        const { nombre, apellidos, numeroEmpleado, correo, fechaNacimiento } = req.body;
-        const updatedProfesor = await Profesor.findByIdAndUpdate(req.params.profesorId, { nombre, apellidos, numeroEmpleado, correo, fechaNacimiento }, { new: true });
+        const { nombre, apellidos, numeroEmpleado, correo, fechaNacimiento, telefono } = req.body;
+        const updatedProfesor = await Profesor.findByIdAndUpdate(req.params.profesorId, { nombre, apellidos, numeroEmpleado, correo, fechaNacimiento, telefono }, { new: true, runValidators: true });
         if (!updatedProfesor) {
             return res.status(404).json({ message: 'Profesor no encontrado' });
         }

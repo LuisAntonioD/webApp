@@ -1,5 +1,7 @@
 import Admision from '../models/admision.js';
 import mongoose from 'mongoose';
+import OfertaEducativa from '../models/ofertaEducativa.js';
+
 
 export const getAdmisiones = async (req, res) =>{
     const admisiones = await Admision.find();
@@ -70,9 +72,9 @@ export const adminNewOfert = async (req, res) => {
 
     const { admisiones, ofertasaniadidas } = req.body;
 
-    // Validación de ID de oferta educativa
+    // Validación del ID de la admision
     if (!mongoose.Types.ObjectId.isValid(admisiones)) {
-        return res.status(400).json({ message: 'ID de oferta educativa inválido' });
+        return res.status(400).json({ message: 'ID Admisióninválido' });
     }
 
     try {

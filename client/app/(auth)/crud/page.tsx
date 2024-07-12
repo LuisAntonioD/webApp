@@ -17,6 +17,8 @@ const endpointObtenerAdmisionPorId =
   "https://lizard-server.vercel.app/api/admision/:admisionId";
 const endpointOfertaPorId =
   "https://lizard-server.vercel.app/api/oferta/:ofertaId";
+const endpointAniadirOfertaAdmision =
+  "https://lizard-server.vercel.app/api/admision/admisiontooferta";
 
 // Respuestas de la API
 
@@ -165,6 +167,30 @@ const mensajeOfertaEliminada = [
   {
     message: "Oferta educativa eliminada exitosamente",
   },
+];
+
+const cuerpoaniadirOfertaAdmision = [
+  {
+    admisiones: "66872fe0fff1637589019348",
+    ofertasaniadidas: ["6690d131463acb44a9b40fd6", "6690e7dac7f98b12257443af"]
+  },
+];
+
+const mensajeaniadirOfertaAdmision = [
+  {
+    "message": "Ofertas añadidas a la admisión exitosamente",
+    "admision": {
+        "ofertas": [
+            "6690d131463acb44a9b40fd6",
+            "6690e7dac7f98b12257443af"
+        ],
+        "_id": "66872fe0fff1637589019348",
+        "nombre": "Agosto-Diciembre",
+        "activo": true,
+        "createdAt": "2024-07-04T23:27:28.123Z",
+        "updatedAt": "2024-07-12T18:45:21.263Z"
+    }
+}
 ];
 
 export default function ResetPassword() {
@@ -645,6 +671,51 @@ export default function ResetPassword() {
               <div className="bg-gray-600 p-4 rounded-md shadow-md">
                 <pre className="overflow-x-auto">
                   {JSON.stringify(mensajeOfertaEliminada, null, 2)}
+                </pre>
+              </div>
+            </div>
+          </div>
+           {/* Bloque Añadir ofertas a Admision */}
+           <div className="bg-blue p-8 rounded-lg shadow-md">
+            <h2 className="text-3xl font-bold text-center mb-4">
+            Añadir ofertas a Admision 
+            </h2>
+            <p className="text-center text-gray-600 mb-4">
+              Recuerda que para añadir es con{" "}
+              <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-red-600 bg-yellow-200 rounded-full mb-4">
+                POST
+              </div>{" "}
+            </p>
+            <div className="bg-gray-600 p-4 rounded-md shadow-md mb-4">
+              <p className="text-center">
+                <a
+                  href={endpointAniadirOfertaAdmision}
+                  className="text-blue-500 font-bold no-underline"
+                >
+                  {endpointOfertaPorId}
+                </a>
+              </p>
+            </div>
+            <p className="text-center text-gray-600 mb-4">
+              Lo siguiente debe enviarse en el cuerpo para añadir Ofertas a Admisiones:
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(cuerpoaniadirOfertaAdmision, null, 2)}
+                </pre>
+              </div>
+            </div>
+            <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">
+              Request code: 200
+            </div>{" "}
+            <p className="text-center text-gray-600 mb-4">
+              Mensaje que aparecerá al Añadir las Ofertas a la Admisión:{" "}
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(mensajeaniadirOfertaAdmision, null, 2)}
                 </pre>
               </div>
             </div>

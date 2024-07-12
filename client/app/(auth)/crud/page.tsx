@@ -697,7 +697,8 @@ export default function ResetPassword() {
               </p>
             </div>
             <p className="text-center text-gray-600 mb-4">
-              Lo siguiente debe enviarse en el cuerpo para añadir Ofertas a Admisiones:
+              Lo siguiente debe enviarse en el cuerpo para añadir Ofertas a Admisiones(Recuerda que solo usamos
+              los ID's, tanto de la admisión como de las ofertas para facilitar la busqueda de las mismas):
             </p>
             <div>
               <div className="bg-gray-600 p-4 rounded-md shadow-md">

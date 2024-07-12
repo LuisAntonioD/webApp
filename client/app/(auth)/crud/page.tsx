@@ -692,7 +692,7 @@ export default function ResetPassword() {
                   href={endpointAniadirOfertaAdmision}
                   className="text-blue-500 font-bold no-underline"
                 >
-                  {endpointOfertaPorId}
+                  {endpointAniadirOfertaAdmision}
                 </a>
               </p>
             </div>

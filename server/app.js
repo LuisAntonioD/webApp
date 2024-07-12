@@ -4,24 +4,20 @@ import express from 'express';
 const app = express();
 app.use(express.json());
 
-//crear roles por defecto
+// Crear roles por defecto
 import { createRoles } from './src/libs/initialSetup.js';
 createRoles();
 
-//Ruta inicial
-app.get('/', (req, res) =>{
-    res.send(messages.Welcome)
+// Ruta inicial
+app.get('/', (req, res) => {
+    res.send(messages.Welcome);
 });
 
-
-app.use(cors(
-  {
+app.use(cors({
     origin: "*",
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true
-  }
-))
-
+}));
 
 /* 
  ######                             
@@ -41,10 +37,10 @@ import userRoutes from './src/routes/user.routes.js'
 import roles from './src/routes/roles.routes.js'
 
 app.use('/api/admision', admisionRoutes);
-app.use('/api/auth',authRoutes);
-app.use('/api/oferta',ofertaRoutes);
-app.use('/api/profesores',profesorRoutes);
-app.use('/api/users',userRoutes);
-app.use('/api/roles',roles);
+app.use('/api/auth', authRoutes);
+app.use('/api/oferta', ofertaRoutes);
+app.use('/api/profesores', profesorRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/roles', roles);
 
 export default app;

@@ -10,7 +10,8 @@ const ofertaEducativaSchema = new Schema({
     activo: {
         type: Boolean,
         default: true
-    }
+    },
+    profesores: [{ type: Schema.Types.ObjectId, ref: 'Profesor' }] // Añadir este campo para relacionar profesores
 }, {
     timestamps: true,
     versionKey: false

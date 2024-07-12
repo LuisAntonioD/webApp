@@ -8,7 +8,11 @@ const admisionSchema = new Schema({
     activo: {
         type: Boolean,
         default: true
-    }
+    },
+    ofertas: [{
+        ref: "ofertaEducativa",
+        type: Schema.Types.ObjectId
+    }]
 }, {
     timestamps: true,
     versionKey: false

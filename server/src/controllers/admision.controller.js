@@ -63,3 +63,43 @@ export const deleteAdmision = async (req, res) => {
         res.status(500).json({ message: 'Error en el servidor' });
     }
 }
+
+
+// Relacionar admisiones con ofertaEducativa
+export const adminNewOfert = async (req, res) => {
+
+    const { admisiones, ofertasaniadidas } = req.body;
+
+    // Validación de ID de oferta educativa
+    if (!mongoose.Types.ObjectId.isValid(admisiones)) {
+        return res.status(400).json({ message: 'ID de oferta educativa inválido' });
+    }
+
+    try {
+        // Verificar si existe la admision
+        const admision = await Admision.findById(admisiones);
+        if (!admision) {
+            return res.status(404).json({ message: 'Admision no encontrada' });
+        }
+
+        // Validar IDs de mis ofertas
+        const OfertaExistente = await OfertaEducativa.find({ '_id': { $in: ofertasaniadidas } });
+
+        if (OfertaExistente.length !== ofertasaniadidas.length) {
+
+            const OfertaExistenteIds = OfertaExistente.map(ofertanew => ofertanew._id.toString());
+
+            const ofertasNoEncontradas = ofertasaniadidas.filter(id => !OfertaExistenteIds.includes(id));
+
+            return res.status(404).json({ message: `Una o mas ofertas no fueron encontrados: ${ofertasNoEncontradas.join(', ')}` });
+        }
+        // Asignar los IDs de ofertaeducativa a admision
+        admision.ofertas = ofertasaniadidas;
+        await admision.save();
+
+        res.status(200).json({ message: 'Ofertas añadidas a la admisión exitosamente', admision });
+    } catch (error) {
+        console.error('Error al relacionar las ofertas con la admisión:', error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+}

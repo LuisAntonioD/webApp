@@ -48,8 +48,8 @@ export const createOferta = async (req, res) => {
 // Actualizar una oferta educativa por su ID
 export const updateOferta = async (req, res) => {
     try {
-        const { nombre, activo } = req.body;
-        const updatedOferta = await OfertaEducativa.findByIdAndUpdate(req.params.ofertaId, { nombre, activo }, { new: true });
+        const { nombre, activo, profesores } = req.body;
+        const updatedOferta = await OfertaEducativa.findByIdAndUpdate(req.params.ofertaId, { nombre, activo, profesores }, { new: true });
         if (!updatedOferta) {
             return res.status(404).json({ message: 'Oferta educativa no encontrada' });
         }

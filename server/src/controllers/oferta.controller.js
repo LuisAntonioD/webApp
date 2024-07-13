@@ -35,8 +35,8 @@ export const getOfertaById = async (req, res) => {
 // Crear una nueva oferta educativa
 export const createOferta = async (req, res) => {
     try {
-        const { nombre, activo } = req.body;
-        const newOferta = new OfertaEducativa({ nombre, activo });
+        const { nombre, activo, profesores } = req.body;
+        const newOferta = new OfertaEducativa({ nombre, activo, profesores });
         const ofertaSave = await newOferta.save();
         res.status(201).json(ofertaSave);
     } catch (error) {

@@ -36,7 +36,7 @@ export const getById = async (req, res) => {
 export const createDivision = async (req, res) => {
     try {
         const { nombre, activo, ofertas } = req.body;
-        const newDivision = new OfertaEducativa({ nombre, activo, ofertas });
+        const newDivision = new divisiones({ nombre, activo, ofertas });
         const divisionSave = await newDivision.save();
         res.status(201).json(divisionSave);
     } catch (error) {

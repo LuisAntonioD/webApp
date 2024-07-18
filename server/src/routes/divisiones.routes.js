@@ -1,16 +1,10 @@
 import { Router } from 'express';
 const router = Router();
 
-import { getOfertas, getOfertaById, createOferta, updateOferta, deleteOferta, addProfesoresToOferta } from '../controllers/divisiones.controller.js';
+import { getDivisiones, createDivision } from '../controllers/divisiones.controller.js';
 
 // Rutas existentes
-router.get('/', getOfertas);
-router.get('/:ofertaId', getOfertaById);
-router.post('/', createOferta);
-router.put('/:ofertaId', updateOferta);
-router.delete('/:ofertaId', deleteOferta);
-
-// Nueva ruta para relacionar una oferta educativa con profesores
-router.post('/relacionar-profesores', addProfesoresToOferta);
+router.get('/', getDivisiones);
+router.post('/', createDivision);
 
 export default router;

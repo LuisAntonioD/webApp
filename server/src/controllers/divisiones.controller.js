@@ -51,7 +51,7 @@ export const createDivision = async (req, res) => {
 export const updateDivision = async (req, res) => {
     try {
         const { nombre, activo, ofertas } = req.body;
-        const updateDivision = await OfertaEducativa.findByIdAndUpdate(req.params.divisionId, { nombre, activo, ofertas }, { new: true });
+        const updateDivision = await divisiones.findByIdAndUpdate(req.params.divisionId, { nombre, activo, ofertas }, { new: true });
         if (!updateDivision) {
             return res.status(404).json({ message: 'Division no encontrada' });
         }

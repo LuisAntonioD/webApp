@@ -1,4 +1,3 @@
-import ofertas from '../models/divisiones.js';
 import divisiones from '../models/divisiones.js';
 import mongoose from 'mongoose';
 

@@ -76,41 +76,4 @@ export const deleteDivision = async (req, res) => {
     }
 }
 
-/*
-// Relacionar una oferta educativa con Divisiones
-export const addProfesoresToOferta = async (req, res) => {
-    const { ofertaId, profesoresIds } = req.body;
 
-    // Validación de ID de oferta educativa
-    if (!mongoose.Types.ObjectId.isValid(ofertaId)) {
-        return res.status(400).json({ message: 'ID de oferta educativa inválido' });
-    }
-
-    try {
-        // Verificar existencia de la oferta educativa
-        const oferta = await OfertaEducativa.findById(ofertaId);
-        if (!oferta) {
-            return res.status(404).json({ message: 'Oferta educativa no encontrada' });
-        }
-
-        // Validar IDs de profesores
-        const profesoresExisten = await Profesor.find({ '_id': { $in: profesoresIds } });
-        if (profesoresExisten.length !== profesoresIds.length) {
-            // Alguno de los IDs de profesores no existe
-            const profesoresExistenIds = profesoresExisten.map(profesor => profesor._id.toString());
-            const profesoresNoEncontrados = profesoresIds.filter(id => !profesoresExistenIds.includes(id));
-
-            return res.status(404).json({ message: `Uno o más profesores no fueron encontrados: ${profesoresNoEncontrados.join(', ')}` });
-        }
-
-        // Asignar los IDs de profesores a la oferta educativa
-        oferta.profesores = profesoresIds;
-        await oferta.save();
-
-        res.status(200).json({ message: 'Profesores añadidos a la oferta educativa exitosamente', oferta });
-    } catch (error) {
-        console.error('Error al relacionar profesores con la oferta educativa:', error);
-        res.status(500).json({ message: 'Error en el servidor' });
-    }
-};
-*/

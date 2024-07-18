@@ -5,29 +5,29 @@ import mongoose from 'mongoose';
 // Obtener todas las ofertas educativas
 export const getDivisiones = async (req, res) => {
     try {
-        const divisiones = await OfertaEducativa.find();
-        res.json(divisiones);
+        const division = await divisiones.find();
+        res.json(division);
     } catch (error) {
         console.error('Error al obtener divisiones:', error);
         res.status(500).json({ message: 'Error en el servidor' });
     }
 }
 
-// Obtener una oferta educativa por su ID
-export const getById = async (req, res) => {
+// Obtener una division por su ID
+export const getDivisionById = async (req, res) => {
     try {
         // Verificar si el ID proporcionado es válido
-        if (!mongoose.Types.ObjectId.isValid(req.params.ofertaId)) {
-            return res.status(400).json({ message: 'ID de oferta educativa inválido' });
+        if (!mongoose.Types.ObjectId.isValid(req.params.divisionId)) {
+            return res.status(400).json({ message: 'ID de la division inválido' });
         }
 
-        const oferta = await OfertaEducativa.findById(req.params.ofertaId);
-        if (!oferta) {
-            return res.status(404).json({ message: 'Oferta educativa no encontrada' });
+        const division = await divisiones.findById(req.params.divisionId);
+        if (!division) {
+            return res.status(404).json({ message: 'Division no encontrada' });
         }
-        res.json(oferta);
+        res.json(division);
     } catch (error) {
-        console.error('Error al obtener oferta educativa por ID:', error);
+        console.error('Error al obtener Divisiones por ID:', error);
         res.status(500).json({ message: 'Error en el servidor' });
     }
 }
@@ -46,36 +46,37 @@ export const createDivision = async (req, res) => {
 }
 
 
-/*
+
 // Actualizar una Division por su ID
-export const updateOferta = async (req, res) => {
+export const updateDivision = async (req, res) => {
     try {
-        const { nombre, activo, profesores } = req.body;
-        const updatedOferta = await OfertaEducativa.findByIdAndUpdate(req.params.ofertaId, { nombre, activo, profesores }, { new: true });
-        if (!updatedOferta) {
-            return res.status(404).json({ message: 'Oferta educativa no encontrada' });
+        const { nombre, activo, ofertas } = req.body;
+        const updateDivision = await OfertaEducativa.findByIdAndUpdate(req.params.divisionId, { nombre, activo, ofertas }, { new: true });
+        if (!updateDivision) {
+            return res.status(404).json({ message: 'Division no encontrada' });
         }
-        res.json(updatedOferta);
+        res.json(updateDivision);
     } catch (error) {
-        console.error('Error al actualizar oferta educativa:', error);
+        console.error('Error al actualizar la Division:', error);
         res.status(500).json({ message: 'Error en el servidor' });
     }
 }
 
 // Eliminar una Division por su ID
-export const deleteOferta = async (req, res) => {
+export const deleteDivision = async (req, res) => {
     try {
-        const deletedOferta = await OfertaEducativa.findByIdAndDelete(req.params.ofertaId);
-        if (!deletedOferta) {
-            return res.status(404).json({ message: 'Oferta educativa no encontrada' });
+        const deletedDivision = await divisiones.findByIdAndDelete(req.params.divisionId);
+        if (!deletedDivision) {
+            return res.status(404).json({ message: 'Division no encontrada' });
         }
-        res.json({ message: 'Oferta educativa eliminada exitosamente' });
+        res.json({ message: 'Division eliminada exitosamente' });
     } catch (error) {
-        console.error('Error al eliminar oferta educativa:', error);
+        console.error('Error al eliminar Division:', error);
         res.status(500).json({ message: 'Error en el servidor' });
     }
 }
 
+/*
 // Relacionar una oferta educativa con Divisiones
 export const addProfesoresToOferta = async (req, res) => {
     const { ofertaId, profesoresIds } = req.body;

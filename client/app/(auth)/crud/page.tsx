@@ -799,7 +799,7 @@ export default function ResetPassword() {
           {/* Bloque divisiones - Crear */}
           <div className="bg-blue p-8 rounded-lg shadow-md">
             <h2 className="text-3xl font-bold text-center mb-4">
-              Creación de una nueva división
+              Creación de una nueva División
             </h2>
             <p className="text-center text-gray-600 mb-4">
               Con el siguiente endpoint puedes dar de alta una nueva División

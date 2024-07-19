@@ -201,7 +201,7 @@ export default function ResetPassword() {
           {/* Page header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
             <h1 className="h1">
-              ¡En esta sección abarcamos el manejo de CRUD de cada modulo!
+              ¡En esta sección abarcamos el manejo de CRUD de cada modulo!000
             </h1>
             <p
               className="text-xl text-gray-400 mb-8"

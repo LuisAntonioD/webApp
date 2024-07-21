@@ -83,6 +83,19 @@ const responseMensajeAltaDivisiones = [
   },
 ];
 
+const responseMensajeAltaMaterias = [
+  {
+    nombre: "Algebra",
+    descripcion: "Materia de algebra avanzadas",
+    ofertasEducativas: [
+        "66906fcd794547da83c407c5",
+        "66906ff7794547da83c407ca"
+    ],
+    _id: "669d7953356cfa7ae88441b3",
+    createdAt: "2024-07-21T21:10:43.634Z",
+    updatedAt: "2024-07-21T21:10:43.634Z"
+}
+];
 
 const responseMensajeAltaProfe = [
   {

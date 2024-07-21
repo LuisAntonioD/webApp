@@ -125,3 +125,23 @@ export const getRelatedOffers = async (req, res) => {
         res.status(500).json({ message: 'Error al obtener las ofertas educativas' });
     }
 };
+
+
+export const getOffersByAdmisionId = async (req, res) => {
+    try {
+        const { admisionId } = req.params;
+        
+        // Encuentra la admisión por su ID
+        const admision = await Admision.findById(admisionId).populate('ofertas');
+        
+        if (!admision) {
+            return res.status(404).json({ message: 'Admisión no encontrada' });
+        }
+
+        // Encuentra las ofertas educativas relacionadas con la admisión
+        const ofertas = await Oferta.find({ _id: { $in: admision.ofertas } });
+        res.json(ofertas);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener las ofertas educativas' });
+    }
+};

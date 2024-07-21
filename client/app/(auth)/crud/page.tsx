@@ -9,6 +9,8 @@ const endpointAdmisionesGet = "https://lizard-server.vercel.app/api/admision";
 
 const endpointGetProfesores = "https://lizard-server.vercel.app/api/profesores";
 const endpointGetDivisiones = "https://lizard-server.vercel.app/api/divisiones";
+const endpointGetMaterias = "https://lizard-server.vercel.app/api/materias";
+
 
 const endpointAdmisionCrear = "https://lizard-server.vercel.app/api/admision";
 const endpointCrearOferta = "https://lizard-server.vercel.app/api/oferta";

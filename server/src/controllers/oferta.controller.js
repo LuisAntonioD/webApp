@@ -1,5 +1,6 @@
 import OfertaEducativa from '../models/ofertaEducativa.js';
 import Profesor from '../models/profesor.js';
+import Division from '../models/divisiones.js';
 import mongoose from 'mongoose';
 
 // Obtener todas las ofertas educativas
@@ -35,8 +36,8 @@ export const getOfertaById = async (req, res) => {
 // Crear una nueva oferta educativa
 export const createOferta = async (req, res) => {
     try {
-        const { nombre, activo } = req.body;
-        const newOferta = new OfertaEducativa({ nombre, activo });
+        const { nombre, activo, profesores, divisiones } = req.body;
+        const newOferta = new OfertaEducativa({ nombre, activo, profesores, divisiones });
         const ofertaSave = await newOferta.save();
         res.status(201).json(ofertaSave);
     } catch (error) {
@@ -48,8 +49,8 @@ export const createOferta = async (req, res) => {
 // Actualizar una oferta educativa por su ID
 export const updateOferta = async (req, res) => {
     try {
-        const { nombre, activo } = req.body;
-        const updatedOferta = await OfertaEducativa.findByIdAndUpdate(req.params.ofertaId, { nombre, activo }, { new: true });
+        const { nombre, activo, profesores, divisiones } = req.body;
+        const updatedOferta = await OfertaEducativa.findByIdAndUpdate(req.params.ofertaId, { nombre, activo, profesores, divisiones }, { new: true });
         if (!updatedOferta) {
             return res.status(404).json({ message: 'Oferta educativa no encontrada' });
         }
@@ -110,3 +111,6 @@ export const addProfesoresToOferta = async (req, res) => {
         res.status(500).json({ message: 'Error en el servidor' });
     }
 };
+
+
+

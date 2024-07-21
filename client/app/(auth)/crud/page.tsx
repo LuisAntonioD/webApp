@@ -8,6 +8,8 @@ const endpointOfertasGet = "https://lizard-server.vercel.app/api/oferta";
 const endpointAdmisionesGet = "https://lizard-server.vercel.app/api/admision";
 
 const endpointGetProfesores = "https://lizard-server.vercel.app/api/profesores";
+const endpointGetDivisiones = "https://lizard-server.vercel.app/api/divisiones";
+
 const endpointAdmisionCrear = "https://lizard-server.vercel.app/api/admision";
 const endpointCrearOferta = "https://lizard-server.vercel.app/api/oferta";
 
@@ -17,8 +19,28 @@ const endpointObtenerAdmisionPorId =
   "https://lizard-server.vercel.app/api/admision/:admisionId";
 const endpointOfertaPorId =
   "https://lizard-server.vercel.app/api/oferta/:ofertaId";
+const endpointDivisionPorId =
+  "https://lizard-server.vercel.app/api/divisiones/:divisionId";
+const endpointAniadirOfertaAdmision =
+  "https://lizard-server.vercel.app/api/admision/admisiontooferta";
 
 // Respuestas de la API
+
+
+const response201AltaDivisiones = [
+      {
+        "x-access-token": "your_access_token_here",
+        "Content-Type": "application/json",
+      },
+      {
+        nombre: "Tecnologias de la Automatizacion",
+        activo: true,
+        ofertas: [
+          "66906fcd794547da83c407c5"
+        ],
+      },
+];
+
 
 const response201AltaProfe = [
   {
@@ -33,6 +55,20 @@ const response201AltaProfe = [
     fechaNacimiento: "1980-01-01",
   },
 ];
+
+const responseMensajeAltaDivisiones = [
+  {
+    nombre: "Tecnologias de la Automatizacion",
+    activo: true,
+    ofertas: [
+      "66906fcd794547da83c407c5"
+    ],
+    _id: "6699b16f9d1faa2ee015aaa5",
+    createdAt: "2024-04-06T06:12:24.605Z",
+    updatedAt: "2024-04-06T06:12:24.605Z",
+  },
+];
+
 
 const responseMensajeAltaProfe = [
   {
@@ -131,6 +167,14 @@ const cuerpoCrearOferta = [
   {
     nombre: "Ingeniería en Gestión y Desarrollo de Software",
     activo: true,
+    profesores: [
+            "668e3cf15f092c2f1019b8bc",
+            "668f6458171667f64be3863e"
+    ],
+    divisiones: [
+            "6699a3229e139c12812f25ff",
+            "6699b16f9d1faa2ee015aaa5"
+    ],
   },
 ];
 
@@ -151,6 +195,30 @@ const cuerpoEditarOferta = [
   },
 ];
 
+
+const cuerpoEditarDivision = [
+  {
+    nombre: "Tecnologias de la Automatizacion",
+    activo: true,
+    ofertas: [
+      "66906fcd794547da83c407c5"
+    ],
+  },
+];
+
+const responseMensajeEditarDivision = [
+  {
+    _id: "65f21676e1fe9db7504a6b65",
+    nombre: "Ingenería en Automatización",
+    activo: true,
+    ofertas: [
+      "66906fcd794547da83c407c5"
+    ],
+    createdAt: "2024-03-13T21:11:18.240Z",
+    updatedAt: "2024-04-06T20:33:54.751Z",
+  },
+];
+
 const responseMensajeEditarOferta = [
   {
     _id: "65f21676e1fe9db7504a6b65",
@@ -165,6 +233,37 @@ const mensajeOfertaEliminada = [
   {
     message: "Oferta educativa eliminada exitosamente",
   },
+];
+
+
+const mensajeDivisionEliminada = [
+  {
+    message: "División eliminada exitosamente",
+  },
+];
+
+const cuerpoaniadirOfertaAdmision = [
+  {
+    admisiones: "66872fe0fff1637589019348",
+    ofertasaniadidas: ["6690d131463acb44a9b40fd6", "6690e7dac7f98b12257443af"]
+  },
+];
+
+const mensajeaniadirOfertaAdmision = [
+  {
+    "message": "Ofertas añadidas a la admisión exitosamente",
+    "admision": {
+        "ofertas": [
+            "6690d131463acb44a9b40fd6",
+            "6690e7dac7f98b12257443af"
+        ],
+        "_id": "66872fe0fff1637589019348",
+        "nombre": "Agosto-Diciembre",
+        "activo": true,
+        "createdAt": "2024-07-04T23:27:28.123Z",
+        "updatedAt": "2024-07-12T18:45:21.263Z"
+    }
+}
 ];
 
 export default function ResetPassword() {
@@ -649,6 +748,193 @@ export default function ResetPassword() {
               </div>
             </div>
           </div>
+           {/* Bloque Añadir ofertas a Admision */}
+           <div className="bg-blue p-8 rounded-lg shadow-md">
+            <h2 className="text-3xl font-bold text-center mb-4">
+            Añadir ofertas a Admision 
+            </h2>
+            <p className="text-center text-gray-600 mb-4">
+              Recuerda que para añadir es con{" "}
+              <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-red-600 bg-yellow-200 rounded-full mb-4">
+                POST
+              </div>{" "}
+            </p>
+            <div className="bg-gray-600 p-4 rounded-md shadow-md mb-4">
+              <p className="text-center">
+                <a
+                  href={endpointAniadirOfertaAdmision}
+                  className="text-blue-500 font-bold no-underline"
+                >
+                  {endpointAniadirOfertaAdmision}
+                </a>
+              </p>
+            </div>
+            <p className="text-center text-gray-600 mb-4">
+              Lo siguiente debe enviarse en el cuerpo para añadir Ofertas a Admisiones(Recuerda que solo usamos
+              los ID's, tanto de la admisión como de las ofertas para facilitar la busqueda de las mismas):
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(cuerpoaniadirOfertaAdmision, null, 2)}
+                </pre>
+              </div>
+            </div>
+            <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">
+              Request code: 200
+            </div>{" "}
+            <p className="text-center text-gray-600 mb-4">
+              Mensaje que aparecerá al Añadir las Ofertas a la Admisión:{" "}
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(mensajeaniadirOfertaAdmision, null, 2)}
+                </pre>
+              </div>
+            </div>
+          </div>
+
+
+          {/* Bloque divisiones - Crear */}
+          <div className="bg-blue p-8 rounded-lg shadow-md">
+            <h2 className="text-3xl font-bold text-center mb-4">
+              Creación de una nueva División
+            </h2>
+            <p className="text-center text-gray-600 mb-4">
+              Con el siguiente endpoint puedes dar de alta una nueva División
+            </p>
+            <div className="bg-gray-600 p-4 rounded-md shadow-md mb-4">
+              <p className="text-center">
+                <a
+                  href={endpointGetDivisiones}
+                  className="text-blue-500 font-bold no-underline"
+                >
+                  {endpointGetDivisiones}
+                </a>
+              </p>
+            </div>
+            <p className="text-center text-gray-600 mb-4">
+              Recuerda que para dar de alta es con{" "}
+              <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-yellow-600 bg-yellow-200 rounded-full mb-4">
+                POST
+              </div>{" "}
+              Y colocar lo siguiente en el encabezado y cuerpo para dar de alta:
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(response201AltaDivisiones, null, 2)}
+                </pre>
+              </div>
+            </div>
+            <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">
+              Request code: 201
+            </div>{" "}
+            <p className="text-center text-gray-600 mb-4">
+              Mensaje al ser creado:
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(responseMensajeAltaDivisiones, null, 2)}
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          {/* Bloque divisiones - Editar */}
+          <div className="bg-blue p-8 rounded-lg shadow-md">
+            <h2 className="text-3xl font-bold text-center mb-4">
+              Modificar una División
+            </h2>
+            <p className="text-center text-gray-600 mb-4">
+              Recuerda que para modificar es con{" "}
+              <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-purple-600 bg-purple-200 rounded-full mb-4">
+                PUT
+              </div>{" "}
+            </p>
+            <div className="bg-gray-600 p-4 rounded-md shadow-md mb-4">
+              <p className="text-center">
+                <a
+                  href={endpointDivisionPorId}
+                  className="text-blue-500 font-bold no-underline"
+                >
+                  {endpointDivisionPorId}
+                </a>
+              </p>
+            </div>
+            <p className="text-center text-gray-600 mb-4">
+              Lo siguiente debe enviarse en el encabezado y cuerpo para su
+              edición (puedes modificar un solo atributo pero deberás enviar todo el objeto):
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(cuerpoEditarDivision, null, 2)}
+                </pre>
+              </div>
+            </div>
+            <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">
+              Request code: 200
+            </div>{" "}
+            <p className="text-center text-gray-600 mb-4">Respuesta:</p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(responseMensajeEditarDivision, null, 2)}
+                </pre>
+              </div>
+            </div>
+          </div>
+
+
+          {/* Bloque División - Eliminar */}
+          <div className="bg-blue p-8 rounded-lg shadow-md">
+            <h2 className="text-3xl font-bold text-center mb-4">
+              Eliminar una División
+            </h2>
+            <p className="text-center text-gray-600 mb-4">
+              Recuerda que para eliminar es con{" "}
+              <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-red-600 bg-red-200 rounded-full mb-4">
+                DELETE
+              </div>{" "}
+            </p>
+            <div className="bg-gray-600 p-4 rounded-md shadow-md mb-4">
+              <p className="text-center">
+                <a
+                  href={endpointDivisionPorId}
+                  className="text-blue-500 font-bold no-underline"
+                >
+                  {endpointDivisionPorId}
+                </a>
+              </p>
+            </div>
+            <p className="text-center text-gray-600 mb-4">
+              Lo siguiente debe enviarse en el encabezado para su eliminación:
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(headersEliminacion, null, 2)}
+                </pre>
+              </div>
+            </div>
+            <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">
+              Request code: 200
+            </div>{" "}
+            <p className="text-center text-gray-600 mb-4">
+              Mensaje que aparecerá al ser eliminada:{" "}
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(mensajeDivisionEliminada, null, 2)}
+                </pre>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

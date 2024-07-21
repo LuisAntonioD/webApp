@@ -1,5 +1,7 @@
 import Admision from '../models/admision.js';
 import mongoose from 'mongoose';
+import OfertaEducativa from '../models/ofertaEducativa.js';
+
 
 export const getAdmisiones = async (req, res) =>{
     const admisiones = await Admision.find();
@@ -60,6 +62,46 @@ export const deleteAdmision = async (req, res) => {
         res.json({ message: 'Admision borrada exitosamente' });
     } catch (error) {
         console.error('Error al eliminar admision:', error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+}
+
+
+// Relacionar admisiones con ofertaEducativa
+export const adminNewOfert = async (req, res) => {
+
+    const { admisiones, ofertasaniadidas } = req.body;
+
+    // Validación del ID de la admision
+    if (!mongoose.Types.ObjectId.isValid(admisiones)) {
+        return res.status(400).json({ message: 'ID Admisióninválido' });
+    }
+
+    try {
+        // Verificar si existe la admision
+        const admision = await Admision.findById(admisiones);
+        if (!admision) {
+            return res.status(404).json({ message: 'Admision no encontrada' });
+        }
+
+        // Validar IDs de mis ofertas
+        const OfertaExistente = await OfertaEducativa.find({ '_id': { $in: ofertasaniadidas } });
+
+        if (OfertaExistente.length !== ofertasaniadidas.length) {
+
+            const OfertaExistenteIds = OfertaExistente.map(ofertanew => ofertanew._id.toString());
+
+            const ofertasNoEncontradas = ofertasaniadidas.filter(id => !OfertaExistenteIds.includes(id));
+
+            return res.status(404).json({ message: `Una o mas ofertas no fueron encontrados: ${ofertasNoEncontradas.join(', ')}` });
+        }
+        // Asignar los IDs de ofertaeducativa a admision
+        admision.ofertas = ofertasaniadidas;
+        await admision.save();
+
+        res.status(200).json({ message: 'Ofertas añadidas a la admisión exitosamente', admision });
+    } catch (error) {
+        console.error('Error al relacionar las ofertas con la admisión:', error);
         res.status(500).json({ message: 'Error en el servidor' });
     }
 }

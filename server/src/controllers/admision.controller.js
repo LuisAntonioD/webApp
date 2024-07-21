@@ -1,4 +1,4 @@
-import Admision from '../models/admision.js';
+    import Admision from '../models/admision.js';
 import mongoose from 'mongoose';
 import OfertaEducativa from '../models/ofertaEducativa.js';
 
@@ -105,3 +105,23 @@ export const adminNewOfert = async (req, res) => {
         res.status(500).json({ message: 'Error en el servidor' });
     }
 }
+
+export const getRelatedOffers = async (req, res) => {
+    try {
+        const { admisionId } = req.params;
+
+        // Encuentra la admisión por ID
+        const admision = await Admision.findById(admisionId).exec();
+
+        if (!admision) {
+            return res.status(404).json({ message: 'Admisión no encontrada' });
+        }
+
+        // Obtiene las ofertas educativas relacionadas con la admisión
+        const offers = await OfertaEducativa.find({ _id: { $in: admision.ofertas } }).exec();
+
+        res.json(offers);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener las ofertas educativas' });
+    }
+};

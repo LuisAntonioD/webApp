@@ -26,6 +26,8 @@ import profesorRoutes from './src/routes/profesor.routes.js'
 import userRoutes from './src/routes/user.routes.js'
 import roles from './src/routes/roles.routes.js'
 import divisionesRoutes from './src/routes/divisiones.routes.js'
+import materiaRoutes from './src/routes/materias.routes.js';
+
 
 app.use('/api/admision', admisionRoutes);
 app.use('/api/auth', authRoutes);
@@ -34,6 +36,7 @@ app.use('/api/profesores', profesorRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/roles', roles);
 app.use('/api/divisiones', divisionesRoutes);
+app.use('/api/materias', materiaRoutes);
 
 
 export default app;

@@ -23,22 +23,34 @@ const endpointDivisionPorId =
   "https://lizard-server.vercel.app/api/divisiones/:divisionId";
 const endpointAniadirOfertaAdmision =
   "https://lizard-server.vercel.app/api/admision/admisiontooferta";
-
+const endpointMateriaPorId =
+  "https://lizard-server.vercel.app/api/materia/:materiaId";
 // Respuestas de la API
 
+const response201AltaMaterias = [
+  {
+    "x-access-token": "your_access_token_here",
+    "Content-Type": "application/json",
+  },
+  {
+    nombre: "Algebra",
+    descripcion: "Materia de algebra avanzada",
+    ofertasEducativas: ["66906fcd794547da83c407c5", "66906ff7794547da83c407ca"]
+  }
+];
 
 const response201AltaDivisiones = [
-      {
-        "x-access-token": "your_access_token_here",
-        "Content-Type": "application/json",
-      },
-      {
-        nombre: "Tecnologias de la Automatizacion",
-        activo: true,
-        ofertas: [
-          "66906fcd794547da83c407c5"
-        ],
-      },
+  {
+    "x-access-token": "your_access_token_here",
+    "Content-Type": "application/json",
+  },
+  {
+    nombre: "Tecnologias de la Automatizacion",
+    activo: true,
+    ofertas: [
+      "66906fcd794547da83c407c5"
+    ],
+  },
 ];
 
 
@@ -168,12 +180,12 @@ const cuerpoCrearOferta = [
     nombre: "Ingeniería en Gestión y Desarrollo de Software",
     activo: true,
     profesores: [
-            "668e3cf15f092c2f1019b8bc",
-            "668f6458171667f64be3863e"
+      "668e3cf15f092c2f1019b8bc",
+      "668f6458171667f64be3863e"
     ],
     divisiones: [
-            "6699a3229e139c12812f25ff",
-            "6699b16f9d1faa2ee015aaa5"
+      "6699a3229e139c12812f25ff",
+      "6699b16f9d1faa2ee015aaa5"
     ],
   },
 ];
@@ -206,6 +218,14 @@ const cuerpoEditarDivision = [
   },
 ];
 
+const cuerpoEditarMateria = [
+  {
+    nombre: "Algebra",
+    descripcion: "Materia de algebra avanzada",
+    ofertasEducativas: ["66906fcd794547da83c407c5", "66906ff7794547da83c407ca"]
+  }
+];
+
 const responseMensajeEditarDivision = [
   {
     _id: "65f21676e1fe9db7504a6b65",
@@ -217,6 +237,26 @@ const responseMensajeEditarDivision = [
     createdAt: "2024-03-13T21:11:18.240Z",
     updatedAt: "2024-04-06T20:33:54.751Z",
   },
+];
+
+const responseMensajeEditarMateria = [
+  {
+    _id: "669d746336206533ca1d3c98",
+    nombre: "Matemáticas",
+    descripcion: "Materia de matemáticas bellakas",
+    ofertasEducativas: [
+        {
+            _id: "66906fcd794547da83c407c5",
+            nombre: "Ingeniería en Gestión y Desarrollo de Software"
+        },
+        {
+            _id: "66906ff7794547da83c407ca",
+            nombre: "Ingeniería Ambiental"
+        }
+    ],
+    createdAt: "2024-07-21T20:49:39.310Z",
+    updatedAt: "2024-07-21T21:03:57.267Z"
+}
 ];
 
 const responseMensajeEditarOferta = [
@@ -242,6 +282,12 @@ const mensajeDivisionEliminada = [
   },
 ];
 
+const mensajeMateriaEliminada = [
+  {
+    message: "Materia eliminada exitosamente",
+  },
+];
+
 const cuerpoaniadirOfertaAdmision = [
   {
     admisiones: "66872fe0fff1637589019348",
@@ -253,17 +299,17 @@ const mensajeaniadirOfertaAdmision = [
   {
     "message": "Ofertas añadidas a la admisión exitosamente",
     "admision": {
-        "ofertas": [
-            "6690d131463acb44a9b40fd6",
-            "6690e7dac7f98b12257443af"
-        ],
-        "_id": "66872fe0fff1637589019348",
-        "nombre": "Agosto-Diciembre",
-        "activo": true,
-        "createdAt": "2024-07-04T23:27:28.123Z",
-        "updatedAt": "2024-07-12T18:45:21.263Z"
+      "ofertas": [
+        "6690d131463acb44a9b40fd6",
+        "6690e7dac7f98b12257443af"
+      ],
+      "_id": "66872fe0fff1637589019348",
+      "nombre": "Agosto-Diciembre",
+      "activo": true,
+      "createdAt": "2024-07-04T23:27:28.123Z",
+      "updatedAt": "2024-07-12T18:45:21.263Z"
     }
-}
+  }
 ];
 
 export default function ResetPassword() {
@@ -748,10 +794,10 @@ export default function ResetPassword() {
               </div>
             </div>
           </div>
-           {/* Bloque Añadir ofertas a Admision */}
-           <div className="bg-blue p-8 rounded-lg shadow-md">
+          {/* Bloque Añadir ofertas a Admision */}
+          <div className="bg-blue p-8 rounded-lg shadow-md">
             <h2 className="text-3xl font-bold text-center mb-4">
-            Añadir ofertas a Admision 
+              Añadir ofertas a Admision
             </h2>
             <p className="text-center text-gray-600 mb-4">
               Recuerda que para añadir es con{" "}
@@ -935,6 +981,144 @@ export default function ResetPassword() {
             </div>
           </div>
 
+          {/* Bloque Materias - Crear */}
+          <div className="bg-blue p-8 rounded-lg shadow-md">
+            <h2 className="text-3xl font-bold text-center mb-4">
+              Creación de una nueva materia
+            </h2>
+            <p className="text-center text-gray-600 mb-4">
+              Con el siguiente endpoint puedes dar de alta una nueva materia
+            </p>
+            <div className="bg-gray-600 p-4 rounded-md shadow-md mb-4">
+              <p className="text-center">
+                <a
+                  href={endpointGetMaterias}
+                  className="text-blue-500 font-bold no-underline"
+                >
+                  {endpointGetMaterias}
+                </a>
+              </p>
+            </div>
+            <p className="text-center text-gray-600 mb-4">
+              Recuerda que para dar de alta es con{" "}
+              <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-yellow-600 bg-yellow-200 rounded-full mb-4">
+                POST
+              </div>{" "}
+              Y colocar lo siguiente en el encabezado y cuerpo para dar de alta:
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(response201AltaMaterias, null, 2)}
+                </pre>
+              </div>
+            </div>
+            <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">
+              Request code: 201
+            </div>{" "}
+            <p className="text-center text-gray-600 mb-4">
+              Mensaje al ser creado:
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(responseMensajeAltaMaterias, null, 2)}
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          {/* Bloque Materias - Editar */}
+          <div className="bg-blue p-8 rounded-lg shadow-md">
+            <h2 className="text-3xl font-bold text-center mb-4">
+              Modificar una Materia
+            </h2>
+            <p className="text-center text-gray-600 mb-4">
+              Recuerda que para modificar es con{" "}
+              <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-purple-600 bg-purple-200 rounded-full mb-4">
+                PUT
+              </div>{" "}
+            </p>
+            <div className="bg-gray-600 p-4 rounded-md shadow-md mb-4">
+              <p className="text-center">
+                <a
+                  href={endpointMateriaPorId}
+                  className="text-blue-500 font-bold no-underline"
+                >
+                  {endpointMateriaPorId}
+                </a>
+              </p>
+            </div>
+            <p className="text-center text-gray-600 mb-4">
+              Lo siguiente debe enviarse en el encabezado y cuerpo para su
+              edición (puedes modificar un solo atributo pero deberás enviar todo el objeto):
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(cuerpoEditarMateria, null, 2)}
+                </pre>
+              </div>
+            </div>
+            <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">
+              Request code: 200
+            </div>{" "}
+            <p className="text-center text-gray-600 mb-4">Respuesta:</p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(responseMensajeEditarMateria, null, 2)}
+                </pre>
+              </div>
+            </div>
+          </div>
+
+
+          {/* Bloque Materia - Eliminar */}
+          <div className="bg-blue p-8 rounded-lg shadow-md">
+            <h2 className="text-3xl font-bold text-center mb-4">
+              Eliminar una Materia
+            </h2>
+            <p className="text-center text-gray-600 mb-4">
+              Recuerda que para eliminar es con{" "}
+              <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-red-600 bg-red-200 rounded-full mb-4">
+                DELETE
+              </div>{" "}
+            </p>
+            <div className="bg-gray-600 p-4 rounded-md shadow-md mb-4">
+              <p className="text-center">
+                <a
+                  href={endpointMateriaPorId}
+                  className="text-blue-500 font-bold no-underline"
+                >
+                  {endpointMateriaPorId}
+                </a>
+              </p>
+            </div>
+            <p className="text-center text-gray-600 mb-4">
+              Lo siguiente debe enviarse en el encabezado para su eliminación:
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(headersEliminacion, null, 2)}
+                </pre>
+              </div>
+            </div>
+            <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">
+              Request code: 200
+            </div>{" "}
+            <p className="text-center text-gray-600 mb-4">
+              Mensaje que aparecerá al ser eliminada:{" "}
+            </p>
+            <div>
+              <div className="bg-gray-600 p-4 rounded-md shadow-md">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(mensajeMateriaEliminada, null, 2)}
+                </pre>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

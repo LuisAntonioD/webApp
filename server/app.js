@@ -19,22 +19,13 @@ app.use(cors({
     credentials: true
 }));
 
-/* 
- ######                             
- #     # #    # #####   ##    ####  
- #     # #    #   #    #  #  #      
- ######  #    #   #   #    #  ####  
- #   #   #    #   #   ######      # 
- #    #  #    #   #   #    # #    # 
- #     #  ####    #   #    #  ####  
-                                    
-*/
 import admisionRoutes from './src/routes/admision.routes.js';
 import authRoutes from './src/routes/auth.routes.js';
-import ofertaRoutes from './src/routes/oferta.routes.js'
-import profesorRoutes from './src/routes/profesor.routes.js'
-import userRoutes from './src/routes/user.routes.js'
-import roles from './src/routes/roles.routes.js'
+import ofertaRoutes from './src/routes/oferta.routes.js';
+import profesorRoutes from './src/routes/profesor.routes.js';
+import userRoutes from './src/routes/user.routes.js';
+import roles from './src/routes/roles.routes.js';
+import materiaRoutes from './src/routes/materias.js';
 
 app.use('/api/admision', admisionRoutes);
 app.use('/api/auth', authRoutes);
@@ -42,5 +33,6 @@ app.use('/api/oferta', ofertaRoutes);
 app.use('/api/profesores', profesorRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/roles', roles);
+app.use('/api/materias', materiaRoutes);
 
 export default app;

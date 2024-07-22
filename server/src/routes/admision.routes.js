@@ -34,6 +34,7 @@ router.put('/:admisionId', [authJwt.verifyToken, authJwt.isAdmin],admisionCtrl.u
 router.delete('/:admisionId',[authJwt.verifyToken, authJwt.isAdmin], admisionCtrl.deleteAdmision);
 // Nueva ruta para relacionar una oferta educativa con admisiones
 router.get('/:admisionId/ofertas', admisionCtrl.getRelatedOffers);
+router.get('/:admisionId/offers', admisionCtrl.getOffersByAdmisionId)
 
 
 export default router;

@@ -11,8 +11,9 @@ const ofertaEducativaSchema = new Schema({
         type: Boolean,
         default: true
     },
-    profesores: [{ type: Schema.Types.ObjectId, ref: 'Profesor' }], // Añadir este campo para relacionar profesores
-    divisiones: [{ type: Schema.Types.ObjectId, ref: 'Division' }] // Añadir este campo para relacionar divisiones
+    profesores: [{ type: Schema.Types.ObjectId, ref: 'Profesor' }],
+    divisiones: [{ type: Schema.Types.ObjectId, ref: 'Division' }],
+    cuatrimestres: [{ type: Schema.Types.ObjectId, ref: 'Cuatrimestre' }]
 }, {
     timestamps: true,
     versionKey: false

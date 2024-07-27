@@ -112,6 +112,7 @@ export const addProfesoresToOferta = async (req, res) => {
     }
 };
 
+
 export const getRelatedOffers = async (req, res) => {
     try {
         const { admisionId } = req.params;
@@ -133,3 +134,67 @@ export const getRelatedOffers = async (req, res) => {
 };
 
 
+// Relacionar cuatrimestres y materias con una oferta educativa
+export const addCuatrimestresYMateriasToOferta = async (req, res) => {
+    const { ofertaId, cuatrimestresYMaterias } = req.body;
+
+    // Validación de ID de oferta educativa
+    if (!mongoose.Types.ObjectId.isValid(ofertaId)) {
+        return res.status(400).json({ message: 'ID de oferta educativa inválido' });
+    }
+
+    try {
+        // Verificar existencia de la oferta educativa
+        const oferta = await OfertaEducativa.findById(ofertaId);
+        if (!oferta) {
+            return res.status(404).json({ message: 'Oferta educativa no encontrada' });
+        }
+
+        let cuatrimestresData = [];
+
+        for (let { cuatrimestreId, materiasIds } of cuatrimestresYMaterias) {
+            // Validar ID de cuatrimestre
+            if (!mongoose.Types.ObjectId.isValid(cuatrimestreId)) {
+                return res.status(400).json({ message: `ID de cuatrimestre inválido: ${cuatrimestreId}` });
+            }
+
+            // Verificar existencia del cuatrimestre
+            const cuatrimestre = await Cuatrimestre.findById(cuatrimestreId);
+            if (!cuatrimestre) {
+                return res.status(404).json({ message: `Cuatrimestre no encontrado: ${cuatrimestreId}` });
+            }
+
+            // Validar IDs de materias
+            const materiasExisten = await Materia.find({ '_id': { $in: materiasIds } });
+            if (materiasExisten.length !== materiasIds.length) {
+                const materiasExistenIds = materiasExisten.map(materia => materia._id.toString());
+                const materiasNoEncontradas = materiasIds.filter(id => !materiasExistenIds.includes(id));
+
+                return res.status(404).json({ message: `Una o más materias no fueron encontradas: ${materiasNoEncontradas.join(', ')}` });
+            }
+
+            // Asignar las materias al cuatrimestre
+            cuatrimestre.materias = materiasIds;
+            await cuatrimestre.save();
+
+            // Actualizar la relación de ofertas educativas en las materias
+            for (let materia of materiasExisten) {
+                if (!materia.ofertasEducativas.includes(ofertaId)) {
+                    materia.ofertasEducativas.push(ofertaId);
+                    await materia.save();
+                }
+            }
+
+            cuatrimestresData.push({ cuatrimestre, materias: materiasExisten });
+        }
+
+        // Asignar los cuatrimestres a la oferta educativa
+        oferta.cuatrimestres = cuatrimestresYMaterias.map(c => c.cuatrimestreId);
+        await oferta.save();
+
+        res.status(200).json({ message: 'Cuatrimestres y materias añadidos a la oferta educativa exitosamente', oferta, cuatrimestresData });
+    } catch (error) {
+        console.error('Error al relacionar cuatrimestres y materias con la oferta educativa:', error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+};

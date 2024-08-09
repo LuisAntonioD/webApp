@@ -29,8 +29,8 @@ export const getAdmisionById = async (req, res) => {
 
 export const createAdmision = async (req, res) =>{
     try{    
-        const {nombre, activo} = req.body;
-        const newAdmision = new Admision({nombre,activo});
+        const {nombre, activo, ofertas} = req.body;
+        const newAdmision = new Admision({nombre, activo, ofertas});
         const admisionSave = await newAdmision.save();
         res.status(201).json(admisionSave);
     } catch (error) {

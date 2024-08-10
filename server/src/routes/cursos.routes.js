@@ -2,19 +2,19 @@ import express from 'express';
 const router = express.Router();
 import * as cursoController from '../controllers/cursos.controller.js';
 
-// Crear Materia
+// Crear Cursos
 router.post('/', cursoController.createCurso);
 
-// Leer todas las Materias
+// Traer todos los cursos
 router.get('/', cursoController.getCursos);
 
-// Leer Materia por ID
+// Traer cursos por ID
 router.get('/:id', cursoController.getCursoById);
 
-// Actualizar Materia
+// Actualizar Cursos
 router.put('/:id', cursoController.updateCursos);
 
-// Eliminar Materia
+// Eliminar Cursos
 router.delete('/:id', cursoController.deleteCurso);
 
 export default router;

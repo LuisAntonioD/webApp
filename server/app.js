@@ -40,4 +40,5 @@ app.use('/api/divisiones', divisionesRoutes);
 app.use('/api/materias', materiaRoutes);
 app.use('/api/cursos', cursosRoutes);
 
+
 export default app;

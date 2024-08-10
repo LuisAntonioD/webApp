@@ -1,0 +1,17 @@
+import { Router } from 'express';
+const router = Router();
+
+import { getOfertas, getOfertaById, createOferta, updateOferta, deleteOferta, addProfesoresToOferta, addCuatrimestresYMateriasToOferta } from '../controllers/oferta.controller.js';
+
+// Rutas existentes
+router.get('/', getOfertas);
+router.get('/:ofertaId', getOfertaById);
+router.post('/', createOferta);
+router.put('/:ofertaId', updateOferta);
+router.delete('/:ofertaId', deleteOferta);
+
+// Nueva ruta para relacionar una oferta educativa con profesores
+router.post('/relacionar-profesores', addProfesoresToOferta);
+router.post('/cuatoferta', addCuatrimestresYMateriasToOferta);
+
+export default router;

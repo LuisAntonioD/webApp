@@ -19,4 +19,6 @@ const ofertaEducativaSchema = new Schema({
     versionKey: false
 });
 
+// Cambios realizados por aura
+
 export default mongoose.model('OfertaEducativa', ofertaEducativaSchema);

@@ -30,14 +30,6 @@ import materiaRoutes from './src/routes/materias.routes.js';
 import cursosRoutes from './src/routes/cursos.routes.js';
 
 
-app.use('/api/admision', admisionRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/oferta', ofertaRoutes);
-app.use('/api/profesores', profesorRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/roles', roles);
-app.use('/api/divisiones', divisionesRoutes);
-app.use('/api/materias', materiaRoutes);
 app.use('/api/cursos', cursosRoutes);
 
 

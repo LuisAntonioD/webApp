@@ -2,8 +2,8 @@ import Curso from '../models/cursos.js';
 import Profesor from '../models/profesor.js';
 import mongoose from 'mongoose';
 
-// Crear Materia
-export const createMateria = async (req, res) => {
+// Crear Curso
+export const createCurso = async (req, res) => {
     try {
         const { nombre, profesores  } = req.body;
 
@@ -23,11 +23,11 @@ export const createMateria = async (req, res) => {
     }
 };
 
-// Obtener todos los profesores
-export const getProfesores = async (req, res) => {
+// Obtener todos los Cursos
+export const getCursos = async (req, res) => {
     try {
-        const profes = await Profesor.find().populate('profesores', 'nombre');
-        res.json(profes);
+        const cursitos = await Curso.find().populate('profesores', 'nombre');
+        res.json(cursitos);
     } catch (error) {
         res.status(500).json({ message: 'Error en el servidor' });
     }

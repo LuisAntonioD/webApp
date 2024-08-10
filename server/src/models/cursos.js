@@ -13,4 +13,4 @@ const cursoSchema = new Schema({
     versionKey: false
 });
 
-export default mongoose.model('Curso', cuatrimestreSchema);
+export default mongoose.model('Curso', cursoSchema);

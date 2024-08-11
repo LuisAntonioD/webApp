@@ -1,4 +1,4 @@
-    import Admision from '../models/admision.js';
+import Admision from '../models/admision.js';
 import mongoose from 'mongoose';
 import OfertaEducativa from '../models/ofertaEducativa.js';
 

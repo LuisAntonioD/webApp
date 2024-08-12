@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-
 const admisionSchema = new Schema({
     nombre: {
         type: String,
@@ -12,13 +11,12 @@ const admisionSchema = new Schema({
         type: Boolean,
         default: true
     },
-    //ofertas: [{ref: "ofertaEducativa",type: Schema.Types.ObjectId}]
-    ofertas: [{type: Schema.Types.ObjectId, ref: "ofertaEducativa",}]
-
-    
+    ofertas: [{ type: Schema.Types.ObjectId, ref: 'ofertaEducativa' }]
 }, {
     timestamps: true,
     versionKey: false
 });
 
-export default mongoose.model('Admision', admisionSchema)
+
+export default mongoose.model('Admision', admisionSchema);
+

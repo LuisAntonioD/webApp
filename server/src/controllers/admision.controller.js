@@ -1,4 +1,4 @@
-    import Admision from '../models/admision.js';
+import Admision from '../models/admision.js';
 import mongoose from 'mongoose';
 import OfertaEducativa from '../models/ofertaEducativa.js';
 
@@ -41,8 +41,8 @@ export const createAdmision = async (req, res) =>{
 
 export const updateAdmision = async (req, res) => {
     try {
-        const { nombre, activo } = req.body;
-        const updatedAdmision = await Admision.findByIdAndUpdate(req.params.admisionId, { nombre, activo }, { new: true });
+        const { nombre, activo, ofertas } = req.body;
+        const updatedAdmision = await Admision.findByIdAndUpdate(req.params.admisionId, { nombre, activo, ofertas }, { new: true });
         if (!updatedAdmision) {
             return res.status(404).json({ message: 'Admision no encontrada' });
         }

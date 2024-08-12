@@ -28,8 +28,6 @@ import roles from './src/routes/roles.routes.js'
 import divisionesRoutes from './src/routes/divisiones.routes.js'
 import materiaRoutes from './src/routes/materias.routes.js';
 
-import horariosRoutes from './src/routes/horarios.routes.js'
-app.use('/api/horario', horariosRoutes);
 
 app.use('/api/admision', admisionRoutes);
 app.use('/api/auth', authRoutes);

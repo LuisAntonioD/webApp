@@ -12,7 +12,7 @@ const fechaSchema = new Schema({
     horaFinal: {
         type: String,
     },
-    profesores: [{ type: Schema.Types.ObjectId, ref: 'Profesor' }],
+    profesor: [{ type: Schema.Types.ObjectId, ref: 'Profesor' }],
 }, {
     timestamps: true,
     versionKey: false

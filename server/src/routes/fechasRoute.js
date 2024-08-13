@@ -30,6 +30,6 @@ router.get('/',fechasCtrl.getFechas);
 router.get('/:id', fechasCtrl.getFechaById);
 router.post('/', fechasCtrl.createFecha);
 router.put('/:id',fechasCtrl.updateFecha);
-router.delete('/:id',fechasCtrl.deletefecha);
+router.delete('/:fechaId',fechasCtrl.deletefecha);
 
 export default router;

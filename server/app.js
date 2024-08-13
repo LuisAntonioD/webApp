@@ -20,6 +20,7 @@ app.use(cors({
 }));
 
 import admisionRoutes from './src/routes/admision.routes.js';
+import fechasRoutes from './src/routes/fechasRoute.js';
 import authRoutes from './src/routes/auth.routes.js';
 import ofertaRoutes from './src/routes/oferta.routes.js'
 import profesorRoutes from './src/routes/profesor.routes.js'
@@ -31,6 +32,7 @@ import cursosRoutes from './src/routes/cursos.routes.js';
 
 
 app.use('/api/admision', admisionRoutes);
+app.use('/api/fechas', fechasRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/oferta', ofertaRoutes);
 app.use('/api/profesores', profesorRoutes);
@@ -39,7 +41,5 @@ app.use('/api/roles', roles);
 app.use('/api/divisiones', divisionesRoutes);
 app.use('/api/materias', materiaRoutes);
 app.use('/api/cursos', cursosRoutes);
-
-
 
 export default app;

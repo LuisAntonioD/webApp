@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const horarioSchema = new Schema({
-    dia: {
+const fechaSchema = new Schema({
+    fecha: {
         type: String,
         required: true
     },
@@ -11,17 +11,15 @@ const horarioSchema = new Schema({
         type: String,
         required: true
     },
-    horaFin: {
+    horaFinal: {
         type: String,
         required: true
     },
-    profesores: { 
-        type: Schema.Types.ObjectId, 
-        ref: 'Profesor' 
-    }
+    profesores: [{ type: Schema.Types.ObjectId, ref: 'Profesor' }],
 }, {
     timestamps: true,
     versionKey: false
 });
 
-export default mongoose.model('Horario', horarioSchema);
+
+export default mongoose.model('fecha', admisionSchema);

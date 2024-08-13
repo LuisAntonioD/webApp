@@ -5,15 +5,12 @@ const { Schema } = mongoose;
 const fechaSchema = new Schema({
     fecha: {
         type: String,
-        required: true
     },
     horaInicio: {
         type: String,
-        required: true
     },
     horaFinal: {
         type: String,
-        required: true
     },
     profesores: [{ type: Schema.Types.ObjectId, ref: 'Profesor' }],
 }, {
@@ -22,4 +19,4 @@ const fechaSchema = new Schema({
 });
 
 
-export default mongoose.model('fecha', admisionSchema);
+export default mongoose.model('fecha', fechaSchema);

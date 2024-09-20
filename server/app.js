@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(cors({
-    origin: "https://web-front-fawn.vercel.app",
+    origin: "*",
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true
 }));

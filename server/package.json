@@ -1,5 +1,5 @@
 {
-  "name": "evaluacion@2024",
+  "name": "kolibri",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -24,9 +24,9 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.23.9",
-    "@babel/core": "^7.24.7",
-    "@babel/node": "^7.24.7",
-    "@babel/preset-env": "^7.24.7",
+    "@babel/core": "^7.24.8",
+    "@babel/node": "^7.24.8",
+    "@babel/preset-env": "^7.24.0",
     "nodemon": "^3.1.0"
   }
 }

@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const publicacionSchema = new Schema({
-    titlo: {
+    titulo: {
         type: String,
         trim: true
     },

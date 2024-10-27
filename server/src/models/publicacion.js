@@ -5,7 +5,6 @@ const { Schema } = mongoose;
 const publicacionSchema = new Schema({
     titlo: {
         type: String,
-        required: true,
         trim: true
     },
     descripcion: {

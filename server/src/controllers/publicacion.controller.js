@@ -19,7 +19,7 @@ export const createPublicacion = async (req, res) => {
 // Obtener todas las Publicaciónes
 export const getPublicaciones = async (req, res) => {
     try {
-        const publicaciones = await Publicacion.find().populate('publicaciones', 'titulo');
+        const publicaciones = await Publicacion.find();
         res.json(publicaciones);
     } catch (error) {
         res.status(500).json({ message: 'Error en el servidor' });
